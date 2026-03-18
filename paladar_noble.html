@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Paladar Noble — Pastelería</title>
+<link href="https://fonts.googleapis.com/css2?family=Sacramento&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --sal:        #E8D5BC;   /* beige claro del logo */
+  --sal-raya:   #D4B896;   /* beige caramelo exacto del logo */
+  --sal-osc:    #BFA07A;   /* beige más oscuro */
+  --cafe:       #3D2010;   /* café oscuro del logo */
+  --cafe-med:   #5C3320;   /* café medio */
+  --cafe-light: #7A5535;   /* café claro */
+  --blanco:     #FBF7F2;   /* blanco cálido marfil */
+  --crema:      #F5EDE0;   /* crema beige */
+  --logo-bg:    #D4B896;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Jost', sans-serif; color: var(--cafe); overflow-x: hidden; background: var(--blanco); }
+
+/* ══ FONDOS RAYADOS ══ */
+.bg-rayas {
+  background-color: var(--sal);
+  background-image: repeating-linear-gradient(to right,
+    transparent 0px, transparent 28px,
+    var(--sal-raya) 28px, var(--sal-raya) 48px,
+    transparent 48px, transparent 68px,
+    var(--sal-raya) 68px, var(--sal-raya) 76px);
+}
+.bg-rayas-incl {
+  background-color: var(--sal);
+  background-image: repeating-linear-gradient(168deg,
+    transparent 0px, transparent 22px,
+    var(--sal-raya) 22px, var(--sal-raya) 38px,
+    transparent 38px, transparent 56px,
+    var(--sal-raya) 56px, var(--sal-raya) 62px);
+}
+.bg-rayas-crema {
+  background-color: var(--crema);
+  background-image: repeating-linear-gradient(to right,
+    transparent 0px, transparent 32px,
+    rgba(191,160,122,.4) 32px, rgba(191,160,122,.4) 44px,
+    transparent 44px, transparent 62px,
+    rgba(191,160,122,.22) 62px, rgba(191,160,122,.22) 66px);
+}
+.bg-rayas-cafe {
+  background-color: var(--cafe);
+  background-image: repeating-linear-gradient(to right,
+    transparent 0px, transparent 36px,
+    rgba(232,213,188,.06) 36px, rgba(232,213,188,.06) 48px);
+}
+.bg-rayas-terra {
+  background-color: var(--cafe-med);
+  background-image: repeating-linear-gradient(168deg,
+    transparent 0px, transparent 20px,
+    rgba(255,255,255,.06) 20px, rgba(255,255,255,.06) 34px,
+    transparent 34px, transparent 52px,
+    rgba(255,255,255,.04) 52px, rgba(255,255,255,.04) 58px);
+}
+.bg-rayas-suave {
+  background-color: var(--blanco);
+  background-image: repeating-linear-gradient(to right,
+    transparent 0px, transparent 44px,
+    rgba(191,160,122,.18) 44px, rgba(191,160,122,.18) 54px);
+}
+
+/* ══ NAV ══ */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.7rem 3rem;
+  background: rgba(232,213,188,0.93);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--sal-raya);
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 0.9rem;
+  text-decoration: none;
+}
+.nav-logo img {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #D4B896;
+}
+.nav-logo-text {
+  display: flex; flex-direction: column; line-height: 1;
+}
+.nav-logo-text span:first-child {
+  font-family: 'Sacramento', cursive;
+  font-size: 1.55rem; color: var(--cafe); letter-spacing: .02em;
+}
+.nav-logo-text span:last-child {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: .65rem; letter-spacing: .3em; text-transform: uppercase;
+  color: var(--cafe-med); font-weight: 300; margin-top: 1px;
+}
+.nm { display: flex; gap: 2.4rem; list-style: none; }
+.nm a { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--cafe-med); text-decoration: none; transition: color .3s; }
+.nm a:hover { color: var(--cafe); }
+.nc { font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: var(--blanco); background: var(--cafe); padding: .6rem 1.4rem; text-decoration: none; transition: background .3s; }
+.nc:hover { background: var(--cafe-med); }
+
+/* ══ HERO ══ */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; }
+
+.hero-l {
+  background-color: var(--sal);
+  background-image: repeating-linear-gradient(to right,
+    transparent 0px, transparent 30px,
+    var(--sal-raya) 30px, var(--sal-raya) 50px,
+    transparent 50px, transparent 72px,
+    var(--sal-raya) 72px, var(--sal-raya) 82px);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 9rem 4rem 5rem 5rem; position: relative; overflow: hidden;
+}
+.h-ey { font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--cafe-light); margin-bottom: 1.2rem; }
+
+/* Logo grande en el hero */
+.hero-logo-wrap {
+  margin-bottom: 0.5rem;
+}
+.hero-logo-text { display: flex; flex-direction: column; }
+.h-t {
+  font-family: 'Sacramento', cursive;
+  font-size: clamp(3rem, 5.5vw, 5.5rem);
+  color: var(--cafe); line-height: 1.05; letter-spacing: .02em;
+}
+.h-s {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(.9rem, 1.4vw, 1.3rem);
+  letter-spacing: .45em; text-transform: uppercase;
+  color: var(--cafe-med); font-weight: 300; margin-top: .1rem;
+}
+
+.h-ln { width: 48px; height: 1px; background: var(--sal-osc); margin: 1.8rem 0; }
+.h-d { font-size: .92rem; line-height: 1.85; color: var(--cafe-med); max-width: 360px; margin-bottom: 2.8rem; }
+.h-bs { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+.btn-cafe { font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--blanco); background: var(--cafe); padding: .85rem 2rem; text-decoration: none; transition: all .3s; }
+.btn-cafe:hover { background: var(--cafe-med); }
+.btn-ghost { font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--cafe-med); text-decoration: none; border-bottom: 1px solid var(--sal-raya); padding-bottom: 2px; transition: all .3s; }
+.btn-ghost:hover { color: var(--cafe); border-color: var(--sal-osc); }
+
+.hero-r {
+  display: flex; align-items: center; justify-content: center; padding: 5rem 3rem;
+}
+/* Logo circular grande en el hero derecho */
+.hero-r-inner {
+  display: flex; flex-direction: column; align-items: center; gap: 2rem;
+}
+.hero-logo-circle {
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: #D4B896;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-logo-circle img {
+  width: 95%; height: 95%; object-fit: contain;
+}
+.br { display: flex; gap: .8rem; }
+.pill  { background: var(--cafe); color: var(--blanco); font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; padding: .4rem 1.2rem; }
+.pill-o { border: 1px solid var(--cafe); color: var(--cafe); font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; padding: .4rem 1.2rem; }
+
+/* ══ STRIP ══ */
+.strip { background: var(--cafe); padding: .8rem 3rem; display: flex; align-items: center; justify-content: center; gap: 2.5rem; flex-wrap: wrap; }
+.strip span { font-size: .58rem; letter-spacing: .28em; text-transform: uppercase; color: rgba(242,196,176,.55); white-space: nowrap; }
+.sd { width: 3px; height: 3px; border-radius: 50%; background: var(--sal-raya); flex-shrink: 0; }
+
+/* ══ GENERALES ══ */
+.ey { font-size: .6rem; letter-spacing: .28em; text-transform: uppercase; color: var(--cafe-light); margin-bottom: .6rem; }
+.st { font-family: 'Sacramento', cursive; font-size: clamp(2.5rem, 4vw, 3.8rem); color: var(--cafe); line-height: 1.1; }
+.st-l { color: var(--blanco); }
+.sh { display: flex; align-items: flex-end; gap: 2rem; margin-bottom: 4rem; }
+.sr { flex: 1; height: 1px; background: linear-gradient(to right, var(--sal-raya), transparent); margin-bottom: .55rem; }
+.sr-l { background: linear-gradient(to right, rgba(255,255,255,.2), transparent); }
+
+/* ══ VALORES ══ */
+.valores { padding: 7rem 5rem; }
+.vg { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; }
+.vc { background: rgba(253,248,245,.88); padding: 2.8rem 2rem; border-top: 2.5px solid var(--sal-osc); transition: transform .3s, background .3s; cursor: default; }
+.vc:hover { transform: translateY(-5px); background: var(--blanco); }
+.vn { font-family: 'Sacramento', cursive; font-size: 3.5rem; color: rgba(232,176,154,.4); line-height: 1; margin-bottom: .8rem; }
+.vt { font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: var(--cafe); margin-bottom: .7rem; font-weight: 500; }
+.vd { font-size: .87rem; line-height: 1.75; color: var(--cafe-light); }
+
+/* ══ ESPECIALIDADES ══ */
+.esp { padding: 7rem 5rem; }
+.mg { display: grid; grid-template-columns: repeat(3,1fr); gap: 2px; margin-top: 4rem; }
+.mi { background: rgba(255,255,255,.04); padding: 2.5rem 2rem; border-top: 2px solid transparent; transition: border-color .3s, background .3s; cursor: default; }
+.mi:hover { border-top-color: var(--sal-raya); background: rgba(255,255,255,.07); }
+.mi-ico { font-size: 1.4rem; margin-bottom: 1rem; display: block; }
+.mi-cat { font-size: .57rem; letter-spacing: .24em; text-transform: uppercase; color: rgba(242,196,176,.5); margin-bottom: .4rem; }
+.mi-nm  { font-family: 'Sacramento', cursive; font-size: 1.8rem; color: var(--blanco); margin-bottom: .5rem; line-height: 1.2; }
+.mi-dc  { font-size: .8rem; line-height: 1.65; color: rgba(242,196,176,.45); margin-bottom: 1rem; }
+.mi-pr  { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: var(--sal-raya); }
+
+/* ══ MISIÓN ══ */
+.mv { display: grid; grid-template-columns: 1fr 1fr; }
+.mv-l {
+  padding: 7rem 4.5rem;
+  background-color: var(--cafe-med);
+  background-image: repeating-linear-gradient(168deg,
+    transparent 0px, transparent 24px,
+    rgba(255,255,255,.06) 24px, rgba(255,255,255,.06) 38px,
+    transparent 38px, transparent 56px,
+    rgba(255,255,255,.04) 56px, rgba(255,255,255,.04) 63px);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.mv-q { font-family: 'Sacramento', cursive; font-size: clamp(1.8rem, 2.5vw, 2.6rem); color: var(--blanco); line-height: 1.4; margin-bottom: 2rem; }
+.mv-q::before { content: '\201C'; display: block; font-size: 4rem; line-height: .6; color: rgba(255,255,255,.18); margin-bottom: 1rem; }
+.mv-at { font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.38); }
+.mv-r {
+  padding: 7rem 4.5rem;
+  background-color: var(--crema);
+  background-image: repeating-linear-gradient(to right,
+    transparent 0px, transparent 36px,
+    rgba(191,160,122,.22) 36px, rgba(191,160,122,.22) 48px,
+    transparent 48px, transparent 66px,
+    rgba(191,160,122,.12) 66px, rgba(191,160,122,.12) 70px);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.mvb { margin-bottom: 2.4rem; }
+.mvb:last-child { margin-bottom: 0; }
+.mvl { font-size: .6rem; letter-spacing: .26em; text-transform: uppercase; color: var(--cafe-light); margin-bottom: .55rem; }
+.mvt { font-size: .88rem; line-height: 1.8; color: var(--cafe-med); }
+.mvhr { width: 36px; height: 1px; background: var(--sal-raya); margin: 2rem 0; }
+
+/* ══ COMPETENCIA ══ */
+.comp { padding: 7rem 5rem; }
+.ci { font-size: .9rem; line-height: 1.8; color: var(--cafe-light); max-width: 580px; margin-bottom: 3.5rem; }
+.cg { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; }
+.cc { background: rgba(253,248,245,.82); padding: 1.8rem 1.5rem; border-bottom: 2px solid transparent; transition: border-color .3s; cursor: default; }
+.cc:hover { border-bottom-color: var(--sal-osc); }
+.cn { font-family: 'Sacramento', cursive; font-size: 1.35rem; color: var(--cafe); margin-bottom: .35rem; }
+.ctg { display: inline-block; font-size: .56rem; letter-spacing: .14em; text-transform: uppercase; color: var(--cafe-med); background: rgba(107,53,53,.1); padding: 2px 8px; margin-bottom: .55rem; }
+.cd { font-size: .8rem; line-height: 1.6; color: var(--cafe-light); }
+
+/* ══ MARKETING ══ */
+.mkt { padding: 7rem 5rem; }
+.mkt .ey { color: rgba(242,196,176,.5); }
+.mktg { display: grid; grid-template-columns: repeat(2,1fr); gap: 2px; margin-top: 4rem; }
+.mc { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1); padding: 3rem 2.5rem; position: relative; overflow: hidden; transition: background .3s; }
+.mc:hover { background: rgba(255,255,255,.12); }
+.mc-n { font-family: 'Sacramento', cursive; font-size: 5.5rem; color: rgba(255,255,255,.08); position: absolute; top: -.5rem; right: 1rem; line-height: 1; }
+.mc-l { font-size: .58rem; letter-spacing: .24em; text-transform: uppercase; color: rgba(242,196,176,.45); margin-bottom: .8rem; }
+.mc-t { font-family: 'Sacramento', cursive; font-size: 1.9rem; color: var(--blanco); margin-bottom: .7rem; line-height: 1.2; }
+.mc-d { font-size: .85rem; line-height: 1.75; color: rgba(242,196,176,.55); }
+
+/* ══ CTA ══ */
+.cta {
+  padding: 5.5rem 5rem;
+  display: flex; align-items: center; justify-content: space-between; gap: 3rem; flex-wrap: wrap;
+}
+.cta-ey { font-size: .6rem; letter-spacing: .26em; text-transform: uppercase; color: var(--sal-raya); margin-bottom: .6rem; }
+.cta-t { font-family: 'Sacramento', cursive; font-size: clamp(2.5rem, 4vw, 4rem); color: var(--blanco); line-height: 1.15; }
+.cf { display: flex; }
+.ci2 { font-family: 'Jost', sans-serif; font-size: .85rem; padding: .9rem 1.3rem; min-width: 230px; border: 1px solid rgba(242,196,176,.15); border-right: none; background: rgba(242,196,176,.07); color: var(--blanco); outline: none; }
+.ci2::placeholder { color: rgba(242,196,176,.28); }
+.cb { font-family: 'Jost', sans-serif; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--cafe); background: var(--sal); padding: .9rem 1.6rem; border: none; cursor: pointer; transition: background .3s; white-space: nowrap; }
+.cb:hover { background: var(--blanco); }
+.cn2 { font-size: .65rem; color: rgba(242,196,176,.22); margin-top: .7rem; }
+
+/* ══ FOOTER ══ */
+footer {
+  padding: 5rem 5rem 2.5rem;
+  background-color: var(--cafe);
+  background-image: repeating-linear-gradient(to right,
+    transparent 0px, transparent 44px,
+    rgba(232,213,188,.05) 44px, rgba(232,213,188,.05) 54px);
+}
+.ft { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; padding-bottom: 4rem; border-bottom: 1px solid rgba(242,196,176,.1); margin-bottom: 2.5rem; }
+
+/* Logo en el footer */
+.footer-brand { display: flex; flex-direction: column; gap: 0; }
+.footer-logo-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.5rem; }
+.footer-logo-row img { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; background: #D4B896; }
+.footer-logo-row span { font-family: 'Sacramento', cursive; font-size: 1.9rem; color: var(--sal); letter-spacing: .02em; }
+.ftg { font-size: .6rem; letter-spacing: .22em; text-transform: uppercase; color: rgba(242,196,176,.28); margin-bottom: 1.3rem; }
+.fab { font-size: .84rem; line-height: 1.75; color: rgba(242,196,176,.36); max-width: 260px; }
+
+.fc h4 { font-size: .58rem; letter-spacing: .26em; text-transform: uppercase; color: rgba(232,176,154,.5); margin-bottom: 1.3rem; }
+.fc ul { list-style: none; }
+.fc ul li { font-size: .83rem; color: rgba(242,196,176,.33); margin-bottom: .6rem; cursor: pointer; transition: color .3s; }
+.fc ul li:hover { color: var(--sal); }
+.fb { display: flex; align-items: center; justify-content: space-between; }
+.fcp { font-size: .68rem; color: rgba(242,196,176,.18); letter-spacing: .06em; }
+.fso { display: flex; gap: .8rem; }
+.so { width: 32px; height: 32px; border: 1px solid rgba(242,196,176,.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: rgba(242,196,176,.28); font-size: .7rem; cursor: pointer; transition: all .3s; }
+.so:hover { border-color: var(--sal); color: var(--sal); }
+
+/* ══ ANIMACIONES ══ */
+@keyframes fu { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
+.h-ey{animation:fu .7s .2s both} .hero-logo-wrap{animation:fu .9s .3s both}
+.h-ln{animation:fu .5s .55s both} .h-d{animation:fu .7s .65s both} .h-bs{animation:fu .7s .8s both}
+
+/* ══ TABLET ══ */
+@media(max-width:900px){
+  .nm{display:none}
+  .hero{grid-template-columns:1fr}
+  .hero-r{display:none}
+  .hero-l{padding:7rem 2.5rem 4rem}
+  .valores,.esp{padding:4rem 2.5rem}
+  .vg{grid-template-columns:1fr 1fr}
+  .mg{grid-template-columns:1fr 1fr}
+  .mv{grid-template-columns:1fr}
+  .mv-l,.mv-r{padding:4rem 2.5rem}
+  .cta{padding:4rem 2.5rem}
+  .ft{grid-template-columns:1fr 1fr}
+  footer{padding:4rem 2.5rem 2rem}
+}
+
+/* ══ MÓVIL — diseño completo ══ */
+@media(max-width:480px){
+
+  /* Nav */
+  nav {
+    padding: .65rem 1.2rem;
+    justify-content: space-between;
+  }
+  .nav-logo img { width: 40px; height: 40px; }
+  .nav-logo-text span:first-child { font-size: 1.25rem; }
+  .nav-logo-text span:last-child { font-size: .55rem; letter-spacing: .22em; }
+  .nm { display: none; }
+  .nc { font-size: .62rem; padding: .5rem 1rem; letter-spacing: .12em; }
+
+  /* Hero: columna única, todo visible */
+  .hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-r { display: none; }
+  .hero-l {
+    padding: 6.5rem 1.4rem 3.5rem;
+    min-height: 100svh;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .h-ey { font-size: .55rem; letter-spacing: .22em; margin-bottom: 1rem; }
+  .h-t  { font-size: 3.2rem; line-height: 1.05; }
+  .h-s  { font-size: .75rem; letter-spacing: .32em; margin-bottom: 1.5rem; }
+  .h-ln { margin: 1.4rem 0; width: 36px; }
+  .h-d  { font-size: .9rem; line-height: 1.8; margin-bottom: 2.2rem; max-width: 100%; }
+  .h-bs { flex-direction: column; align-items: flex-start; gap: .8rem; }
+  .btn-cafe { width: 100%; text-align: center; padding: .9rem 1.5rem; font-size: .68rem; }
+  .btn-ghost { font-size: .68rem; }
+
+  /* Strip */
+  .strip { gap: .8rem; padding: .7rem 1rem; }
+  .strip span { font-size: .52rem; letter-spacing: .18em; }
+  .sd { display: none; }
+
+  /* Sección header */
+  .sh { flex-direction: column; gap: .4rem; margin-bottom: 2.5rem; }
+  .sr { display: none; }
+  .ey { font-size: .58rem; }
+  .st { font-size: 2.4rem; }
+
+  /* Valores */
+  .valores { padding: 3.5rem 1.4rem; }
+  .vg { grid-template-columns: 1fr 1fr; gap: 1px; }
+  .vc { padding: 1.8rem 1.2rem; }
+  .vn { font-size: 2.4rem; margin-bottom: .6rem; }
+  .vt { font-size: .68rem; letter-spacing: .12em; margin-bottom: .5rem; }
+  .vd { font-size: .82rem; line-height: 1.65; }
+
+  /* Especialidades */
+  .esp { padding: 3.5rem 1.4rem; }
+  .mg { grid-template-columns: 1fr; gap: 1px; }
+  .mi { padding: 1.8rem 1.4rem; display: flex; align-items: flex-start; gap: 1rem; }
+  .mi-ico { font-size: 1.6rem; margin-bottom: 0; flex-shrink: 0; margin-top: .1rem; }
+  .mi-body { flex: 1; }
+  .mi-cat { font-size: .55rem; letter-spacing: .2em; }
+  .mi-nm  { font-size: 1.5rem; margin-bottom: .3rem; }
+  .mi-dc  { font-size: .78rem; margin-bottom: .6rem; }
+  .mi-pr  { font-size: 1rem; }
+
+  /* Misión */
+  .mv { grid-template-columns: 1fr; }
+  .mv-l { padding: 3.5rem 1.4rem; }
+  .mv-q { font-size: 1.6rem; line-height: 1.4; }
+  .mv-q::before { font-size: 3rem; }
+  .mv-at { font-size: .6rem; }
+  .mv-r { padding: 3.5rem 1.4rem; }
+  .mvb { margin-bottom: 2rem; }
+  .mvl { font-size: .58rem; }
+  .mvt { font-size: .86rem; }
+  .mvhr { margin: 1.5rem 0; }
+
+  /* CTA */
+  .cta {
+    padding: 3.5rem 1.4rem;
+    flex-direction: column; align-items: flex-start; gap: 2rem;
+  }
+  .cta-ey { font-size: .58rem; }
+  .cta-t { font-size: 2.6rem; line-height: 1.15; }
+  .cf { flex-direction: column; width: 100%; gap: 0; }
+  .ci2 {
+    width: 100%; min-width: unset;
+    border-right: 1px solid rgba(242,196,176,.15);
+    border-bottom: none;
+    padding: .9rem 1.1rem;
+    font-size: .85rem;
+  }
+  .cb {
+    width: 100%; padding: .9rem 1.1rem;
+    font-size: .68rem; letter-spacing: .16em;
+  }
+  .cn2 { font-size: .62rem; }
+
+  /* Footer */
+  footer { padding: 3rem 1.4rem 1.5rem; }
+  .ft { grid-template-columns: 1fr; gap: 2rem; padding-bottom: 2.5rem; }
+  .footer-logo-row img { width: 40px; height: 40px; }
+  .footer-logo-row span { font-size: 1.7rem; }
+  .ftg { font-size: .55rem; margin-bottom: 1rem; }
+  .fab { font-size: .8rem; max-width: 100%; }
+  .fc h4 { font-size: .55rem; margin-bottom: 1rem; }
+  .fc ul li { font-size: .8rem; margin-bottom: .5rem; }
+  .fb { flex-direction: column; align-items: flex-start; gap: .8rem; }
+  .fcp { font-size: .62rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══ NAV con logo real ══ -->
+<nav>
+  <a class="nav-logo" href="#">
+    <img src="IMG/logo.png" alt="Paladar Noble logo">
+    <div class="nav-logo-text">
+      <span>Paladar noble</span>
+      <span>Pastelería</span>
+    </div>
+  </a>
+  <ul class="nm">
+    <li><a href="#esp">Especialidades</a></li>
+    <li><a href="#mv">Nosotros</a></li>
+
+    <li><a href="#cta">Contacto</a></li>
+  </ul>
+  <a class="nc" href="#cta">Ordenar</a>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <div class="hero-l">
+    <p class="h-ey">Reynosa, Tamaulipas · Est. 2024</p>
+    <!-- Logo + título integrados -->
+    <div class="hero-logo-wrap">
+      <div class="hero-logo-text">
+        <h1 class="h-t">Paladar noble</h1>
+        <p class="h-s">Pastelería</p>
+      </div>
+    </div>
+    <div class="h-ln"></div>
+    <p class="h-d">Pasteles de diseño exclusivo elaborados con ingredientes premium e importados. Cada creación convierte tu celebración en un momento inolvidable.</p>
+    <div class="h-bs">
+      <a class="btn-cafe" href="#esp">Ver especialidades</a>
+      <a class="btn-ghost" href="#mv">Nuestra historia</a>
+    </div>
+  </div>
+
+  <!-- Hero derecho: logo grande + rayas inclinadas -->
+  <div class="hero-r bg-rayas-incl">
+    <div class="hero-r-inner">
+      <div class="hero-logo-circle">
+        <img src="IMG/logo.png" alt="Paladar Noble">
+      </div>
+      <div class="br">
+        <span class="pill">Premium</span>
+        <span class="pill-o">Artesanal</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STRIP -->
+<div class="strip">
+  <span>Calidad superior</span><div class="sd"></div>
+  <span>Experiencia personalizada</span><div class="sd"></div>
+  <span>Diseño exclusivo</span><div class="sd"></div>
+  <span>Prestigio</span><div class="sd"></div>
+  <span>Reynosa, Tam.</span>
+</div>
+
+<!-- ══ VALORES — rayas crema ══ -->
+<section class="valores bg-rayas-crema">
+  <div class="sh">
+    <div><p class="ey">Por qué elegirnos</p><h2 class="st">Lo que nos hace únicas</h2></div>
+    <div class="sr"></div>
+  </div>
+  <div class="vg">
+    <div class="vc"><div class="vn">01</div><div class="vt">Calidad superior</div><p class="vd">Ingredientes importados y de la más alta gama, seleccionados con pasión por la excelencia.</p></div>
+    <div class="vc"><div class="vn">02</div><div class="vt">Diseño exclusivo</div><p class="vd">Cada pastel es una obra de arte diseñada a medida. No existen dos iguales; cada pedido es irrepetible.</p></div>
+    <div class="vc"><div class="vn">03</div><div class="vt">Experiencia personalizada</div><p class="vd">Atención de principio a fin. Escuchamos cada detalle para convertir tu visión en realidad.</p></div>
+    <div class="vc"><div class="vn">04</div><div class="vt">Prestigio</div><p class="vd">La primera elección de quienes buscan sabores únicos y presentaciones impecables en Reynosa.</p></div>
+  </div>
+</section>
+
+<!-- ══ ESPECIALIDADES — café + rayas ══ -->
+<section class="esp bg-rayas-cafe" id="esp">
+  <div class="sh">
+    <div><p class="ey" style="color:rgba(242,196,176,.5)">Nuestro menú</p><h2 class="st st-l">Creaciones destacadas</h2></div>
+    <div class="sr sr-l"></div>
+  </div>
+  <div class="mg">
+    <div class="mi"><span class="mi-ico">🍫</span><div class="mi-body"><p class="mi-cat">Signature</p><h3 class="mi-nm">Chocolate Noir</h3><p class="mi-dc">Chocolate belga 72%, mousse de café y acabado espejo.</p><span class="mi-pr">Desde $850</span></div></div>
+    <div class="mi"><span class="mi-ico">🍓</span><div class="mi-body"><p class="mi-cat">Temporada</p><h3 class="mi-nm">Red Velvet Couture</h3><p class="mi-dc">Terciopelo rojo, crema de queso importada, frutos rojos frescos.</p><span class="mi-pr">Desde $780</span></div></div>
+    <div class="mi"><span class="mi-ico">🍋</span><div class="mi-body"><p class="mi-cat">Clásico</p><h3 class="mi-nm">Citrus & Lavanda</h3><p class="mi-dc">Bizcocho de limón, cremoso de lavanda y glaseado cítrico.</p><span class="mi-pr">Desde $720</span></div></div>
+    <div class="mi"><span class="mi-ico">✨</span><div class="mi-body"><p class="mi-cat">XV Años & Bodas</p><h3 class="mi-nm">Noble Gold</h3><p class="mi-dc">Múltiples pisos con hoja de oro comestible y flores naturales.</p><span class="mi-pr">Desde $2,400</span></div></div>
+    <div class="mi"><span class="mi-ico">🌹</span><div class="mi-body"><p class="mi-cat">San Valentín</p><h3 class="mi-nm">Pasión Romántica</h3><p class="mi-dc">Chocolate oscuro, frambuesa y rosas comestibles artesanales.</p><span class="mi-pr">Desde $950</span></div></div>
+    <div class="mi"><span class="mi-ico">🎂</span><div class="mi-body"><p class="mi-cat">Personalizado</p><h3 class="mi-nm">Tu diseño único</h3><p class="mi-dc">Cuéntanos tu visión y la convertimos en una obra irrepetible.</p><span class="mi-pr">Cotización</span></div></div>
+  </div>
+</section>
+
+<!-- ══ MISIÓN & VISIÓN ══ -->
+<section class="mv" id="mv">
+  <div class="mv-l">
+    <blockquote class="mv-q">Cada pedido es una experiencia única que refleja la calidad premium que nos define como marca.</blockquote>
+    <p class="mv-at">— Paladar Noble, Reynosa</p>
+  </div>
+  <div class="mv-r">
+    <div class="mvb"><p class="mvl">Nuestra misión</p><p class="mvt">Crear experiencias de sabor únicas a través de pasteles de alta gama, elaborados con ingredientes premium e importados y técnicas de repostería de vanguardia.</p></div>
+    <div class="mvhr"></div>
+    <div class="mvb"><p class="mvl">Nuestra visión</p><p class="mvt">Posicionarnos como la mejor opción de pastelería premium en Reynosa, siendo la primera elección de quienes buscan sabores únicos y diseños creativos.</p></div>
+    <div class="mvhr"></div>
+    <div class="mvb"><p class="mvl">Nuestro compromiso</p><p class="mvt">Atención personalizada, puntualidad y presentación impecable en cada entrega. Tu celebración merece lo mejor.</p></div>
+  </div>
+</section>
+
+<!-- ══ CTA ══ -->
+<section class="cta bg-rayas-cafe" id="cta">
+  <div>
+    <p class="cta-ey">Haz tu pedido</p>
+    <h2 class="cta-t">¿Lista tu celebración?<br>Comencemos.</h2>
+  </div>
+  <div>
+    <div class="cf">
+      <input class="ci2" type="text" placeholder="Tu nombre o WhatsApp"/>
+      <button class="cb">Solicitar cotización</button>
+    </div>
+    <p class="cn2">Respondemos en menos de 24 horas · Reynosa, Tam.</p>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="ft">
+    <div class="footer-brand">
+      <div class="footer-logo-row">
+        <img src="IMG/logo.png" alt="Paladar Noble">
+        <span>Paladar noble</span>
+      </div>
+      <p class="ftg">Pastelería Premium · Reynosa</p>
+      <p class="fab">Creamos pasteles de alta gama con ingredientes premium y diseño exclusivo, convirtiendo cada celebración en un momento inolvidable.</p>
+    </div>
+    <div class="fc"><h4>Especialidades</h4><ul><li>Pasteles de boda</li><li>XV años</li><li>Cumpleaños</li><li>Corporativos</li><li>San Valentín</li></ul></div>
+    <div class="fc"><h4>Empresa</h4><ul><li>Nuestra historia</li><li>Misión y visión</li><li>Portfolio</li><li>Testimoniales</li></ul></div>
+    <div class="fc"><h4>Contacto</h4><ul><li>Reynosa, Tamaulipas</li><li>WhatsApp pedidos</li><li>@paldarnoble</li><li>Facebook</li></ul></div>
+  </div>
+  <div class="fb">
+    <p class="fcp">© 2024 Paladar Noble · Todos los derechos reservados</p>
+    <div class="fso"><span class="so">ig</span><span class="so">fb</span><span class="so">tt</span></div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    e.preventDefault();
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t) t.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
